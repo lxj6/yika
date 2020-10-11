@@ -17,6 +17,16 @@ Route::get('/', function () {
 
 Route::get('/test',"IndexController@test");
 Route::get('/test1',"IndexController@test1");
-Route::get('/login',"LoginController@login");
+
+
+Route::prefix('admin')->group(function(){
+
+    Route::get('login',"LoginController@login");
+
+    Route::get('index',"IndexController@index");
+    Route::get('welcome',"IndexController@welcome");
+
+});
+
 
 

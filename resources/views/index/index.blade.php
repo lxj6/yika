@@ -12,12 +12,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="icon" href="images/favicon.ico">
-    <link rel="stylesheet" href="lib/layui-v2.5.5/css/layui.css" media="all">
-    <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
-    <link rel="stylesheet" href="css/layuimini.css?v=2.0.1" media="all">
-    <link rel="stylesheet" href="css/themes/default.css" media="all">
-    <link rel="stylesheet" href="css/public.css" media="all">
+    <link rel="icon" href="{{asset('static/images/favicon.ico')}}">
+    <link rel="stylesheet" href="{{asset('static/lib/layui-v2.5.5/css/layui.css')}}" media="all">
+    <link rel="stylesheet" href="{{asset('static/lib/font-awesome-4.7.0/css/font-awesome.min.css')}}" media="all">
+    <link rel="stylesheet" href="{{asset('static/css/layuimini.css?v=2.0.1')}}" media="all">
+    <link rel="stylesheet" href="{{asset('static/css/themes/default.css')}}" media="all">
+    <link rel="stylesheet" href="{{asset('static/css/public.css')}}" media="all">
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -115,8 +115,8 @@
     </div>
 
 </div>
-<script src="lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
-<script src="js/lay-config.js?v=2.0.0" charset="utf-8"></script>
+<script src="{{asset('static/lib/layui-v2.5.5/layui.js')}}" charset="utf-8"></script>
+<script src="{{asset('static/js/lay-config.js?v=2.0.0')}}" charset="utf-8"></script>
 <script>
     layui.use(['jquery', 'layer', 'miniAdmin', 'miniTongji'], function () {
         var $ = layui.jquery,
@@ -125,8 +125,8 @@
             miniTongji = layui.miniTongji;
 
         var options = {
-            iniUrl: "api/init.json",    // 初始化接口
-            clearUrl: "api/clear.json", // 缓存清理接口
+            iniUrl: "{{asset('static/api/init.json')}}",    // 初始化接口
+            clearUrl: "{{asset('statis/api/clear.json')}}", // 缓存清理接口
             renderPageVersion: true,    // 初始化页面是否加版本号
             bgColorDefault: false,      // 主题默认配置
             multiModule: true,          // 是否开启多模块

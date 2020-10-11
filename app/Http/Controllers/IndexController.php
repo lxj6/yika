@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
 
 
-    public function test(){
-        dd(Session::all());
+    public function index(){
+
+        return view('index\index');
+    }
+
+    public function welcome(){
+
+        return view('index\welcome');
     }
 
 
-    public function test1(){
-        $res = Session::get('test');
-        echo $res;
-    }
 }
