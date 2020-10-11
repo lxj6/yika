@@ -17,3 +17,6 @@ Route::get('/', function () {
 
 Route::get('/test',"IndexController@test");
 Route::get('/test1',"IndexController@test1");
+Route::get('/login',"LoginController@login");
+
+
