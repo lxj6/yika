@@ -275,14 +275,14 @@ layui.define(["element", "jquery"], function (exports) {
          * @param href
          */
         hashChange: function (href) {
-            window.location.hash = "/" + href;
+            window.location.hash = "view=" + href;
         },
 
         /**
          * 修改hash地址为主页
          */
         hashHome: function () {
-            window.location.hash = "/";
+            window.location.hash = "";
         },
 
         /**
@@ -363,7 +363,7 @@ layui.define(["element", "jquery"], function (exports) {
             options.listenSwichCallback = options.listenSwichCallback || function () {
             };
             window.onhashchange = function () {
-                var href = location.hash.replace(/^#\//, '');
+                var href = location.hash.replace(/^#view=/, '');
                 if (typeof options.listenSwichCallback === 'function') {
                     options.listenSwichCallback();
                 }

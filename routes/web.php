@@ -26,6 +26,8 @@ Route::prefix('admin')->group(function(){
     Route::get('index',"IndexController@index");
     Route::get('welcome',"IndexController@welcome");
 
+    Route::get('system',"SystemController@index");
+
 });
 
 

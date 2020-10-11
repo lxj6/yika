@@ -11,12 +11,12 @@ class IndexController extends BaseController
 
     public function index(){
 
-        return view('index\index');
+        return view('\index\index');
     }
 
     public function welcome(){
 
-        return view('index\welcome');
+        return view('\index\welcome');
     }
 
 
