@@ -130,7 +130,7 @@ layui.define(["element", "jquery"], function (exports) {
          * @param options
          */
         refresh: function (options) {
-            var href = location.hash.replace(/^#\//, '');
+            var href = location.hash.replace(/^#view=/, '');
             if (href === null || href === undefined || href === '') {
                 miniPage.renderHome(options);
             } else {

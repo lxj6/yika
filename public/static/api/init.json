@@ -1,7 +1,7 @@
 {
   "homeInfo": {
     "title": "首页",
-    "href": "/admin/welcome"
+    "href": "/index/welcome"
   },
   "logoInfo": {
     "title": "LAYUI MINI",
@@ -17,19 +17,33 @@
       "child": [
         {
           "title": "网站首页",
-          "href": "/admin/welcome",
-          "icon": "fa fa-tachometer",
+          "href": "/index/welcome",
+          "icon": "fa fa-home",
           "target": "_self"
         },
         {
-          "title": "菜单管理",
-          "href": "page/menu.html",
-          "icon": "fa fa-window-maximize",
-          "target": "_self"
+          "title": "文章管理",
+          "href": "",
+          "icon": "fa fa-file-text",
+          "target": "_self",
+          "child": [
+              {
+                  "title": "分类管理",
+                  "href": "/article/catgory",
+                  "icon": "fa fa-list",
+                  "target": "_self"
+              },
+              {
+                  "title": "文章列表",
+                  "href": "/article/index",
+                  "icon": "fa fa-book",
+                  "target": "_self"
+              }
+          ]
         },
         {
           "title": "系统设置",
-          "href": "/admin/system",
+          "href": "/system/index",
           "icon": "fa fa-gears",
           "target": "_self"
         },

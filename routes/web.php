@@ -15,18 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test',"IndexController@test");
-Route::get('/test1',"IndexController@test1");
+Route::get('login',"LoginController@login");
 
-
-Route::prefix('admin')->group(function(){
-
-    Route::get('login',"LoginController@login");
+Route::group([],function(){
 
     Route::get('index',"IndexController@index");
-    Route::get('welcome',"IndexController@welcome");
+    Route::get('index/welcome',"IndexController@welcome");
 
-    Route::get('system',"SystemController@index");
+    Route::get('system/index',"SystemController@index");
+
+    Route::get('article/index',"ArticleController@index");
+    Route::get('article/catgory',"ArticleController@catgory");
+    Route::get('article/add_article',"ArticleController@add_article");
+    Route::get('article/add_catgory',"ArticleController@add_catgory");
+
+
 
 });
 
