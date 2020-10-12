@@ -22,17 +22,22 @@ Route::any('login',"LoginController@login");
 
 Route::group(['middleware'=>'check.login'],function(){
 
-    Route::get('index',"IndexController@index");
-    Route::get('index/welcome',"IndexController@welcome");
+    Route::any('index',"IndexController@index");
+    Route::any('index/welcome',"IndexController@welcome");
+    Route::any('index/update_pass',"IndexController@update_pass");
 
-    Route::get('system/index',"SystemController@index");
+    Route::any('system/index',"SystemController@index");
 
-    Route::get('article/index',"ArticleController@index");
-    Route::get('article/catgory',"ArticleController@catgory");
-    Route::get('article/add_article',"ArticleController@add_article");
-    Route::get('article/add_catgory',"ArticleController@add_catgory");
+    Route::any('article/index',"ArticleController@index");
+    Route::any('article/catgory',"ArticleController@catgory");
+    Route::any('article/add_article',"ArticleController@add_article");
+    Route::any('article/add_catgory',"ArticleController@add_catgory");
+
+    Route::any('banner/index',"BannerController@index");
+    Route::any('message/index',"MessageController@index");
 
 
+    Route::post('login/out',"LoginController@out");
 
 });
 

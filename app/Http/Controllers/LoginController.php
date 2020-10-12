@@ -33,4 +33,17 @@ class LoginController extends BaseController
         }
         return view("login\login");
     }
+
+    public function out(Request $request){
+        if($request->isMethod('post')){
+
+            session()->flush();
+            $data = [
+                'code' => 200,
+                'msg' => '退出成功!'
+            ];
+            return response()->json($data);
+
+        }
+    }
 }

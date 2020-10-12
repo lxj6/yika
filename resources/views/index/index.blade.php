@@ -21,6 +21,7 @@
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <![endif]-->
     <style id="layuimini-bg-color">
     </style>
@@ -67,7 +68,7 @@
                             <a href="javascript:;" layuimini-content-href="page/user-setting.html" data-title="基本资料" data-icon="fa fa-gears">基本资料<span class="layui-badge-dot"></span></a>
                         </dd>--}}
                         <dd>
-                            <a href="javascript:;" layuimini-content-href="page/user-password.html" data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
+                            <a href="javascript:;" layuimini-content-href="/index/update_pass" data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
                         </dd>
                         <dd>
                             <hr>
@@ -136,19 +137,33 @@
         };
         miniAdmin.render(options);
 
-        // 百度统计代码，只统计指定域名
-        miniTongji.render({
-            specific: true,
-            domains: [
-                '99php.cn',
-                'layuimini.99php.cn',
-                'layuimini-onepage.99php.cn',
-            ],
-        });
 
         $('.login-out').on("click", function () {
-            layer.msg('退出登录成功', function () {
-                window.location = 'page/login-3.html';
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': "{{csrf_token()}}"
+                },
+                url: '{{url('login/out')}}', //请求的url地址
+                dataType: "json", //返回格式为json
+                async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                data:  {} , //参数值
+                method: "POST", //请求方式
+                success: function(res) {
+                    if(res.code == 200){
+                        layer.msg(res.msg, function () {
+                            window.location = '{{url('login')}}';
+                        });
+                    }else{
+                        layer.msg(res.msg);
+                    }
+
+                },
+                error: function() {
+
+                    //请求出错处理
+
+                }
             });
         });
     });

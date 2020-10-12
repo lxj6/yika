@@ -29,4 +29,14 @@ class Admin extends Model
         return $admin->toArray();
     }
 
+    public static function setPwd($user,$pwd){
+
+        $admin = Admin::where('username',$user)->update(['password'=>md5($pwd)]);
+
+        if($admin){
+            return true;
+        }
+        return false;
+    }
+
 }
