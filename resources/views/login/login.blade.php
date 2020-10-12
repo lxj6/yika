@@ -2,13 +2,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>后台管理-登陆</title>
+    <title>易巨网络后台管理-登录</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="{{asset('static/lib/layui-v2.5.5/css/layui.css')}}" media="all">
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -59,7 +60,7 @@
 <div class="main-body">
     <div class="login-main">
         <div class="login-top">
-            <span>易卡后台登录</span>
+            <span>易巨网络</span>
             <span class="bg1"></span>
             <span class="bg2"></span>
         </div>
@@ -84,7 +85,7 @@
     </div>
 </div>
 <div class="footer">
-    ©版权所有 2018-2020 北京易巨网络科技<span class="padding-5">|</span><a target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备16006642号-2</a>
+    ©版权所有 2018-2020 北京易巨网络科技<span class="padding-5">|</span><a target="_blank" href="http://www.miitbeian.gov.cn">京ICP备18047621号-1</a>
 </div>
 <script src="{{asset('static/lib/layui-v2.5.5/layui.js')}}" charset="utf-8"></script>
 <script>
@@ -117,6 +118,7 @@
         // 进行登录操作
         form.on('submit(login)', function (data) {
             data = data.field;
+            console.log(data);
             if (data.username == '') {
                 layer.msg('用户名不能为空');
                 return false;
@@ -125,13 +127,33 @@
                 layer.msg('密码不能为空');
                 return false;
             }
-            if (data.captcha == '') {
-                layer.msg('验证码不能为空');
-                return false;
-            }
-            layer.msg('登录成功', function () {
-                window.location = "{{url('admin/index')}}";
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '{{url('login')}}', //请求的url地址
+                dataType: "json", //返回格式为json
+                async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                data:  data , //参数值
+                method: "POST", //请求方式
+                success: function(res) {
+                    if(res.code == 200){
+                        layer.msg(res.msg, function () {
+                            window.location = '{{url('index')}}';
+                        });
+                    }else{
+                        layer.msg(res.msg);
+                    }
+
+                },
+                error: function() {
+
+                    //请求出错处理
+
+                }
             });
+
             return false;
         });
     });

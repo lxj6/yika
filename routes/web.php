@@ -12,12 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('index');
+    //return view('welcome');
 });
 
-Route::get('login',"LoginController@login");
+Route::get('test',"IndexController@test");
 
-Route::group([],function(){
+Route::any('login',"LoginController@login");
+
+Route::group(['middleware'=>'check.login'],function(){
 
     Route::get('index',"IndexController@index");
     Route::get('index/welcome',"IndexController@welcome");
