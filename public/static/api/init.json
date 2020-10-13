@@ -35,7 +35,7 @@
           "child": [
               {
                   "title": "分类管理",
-                  "href": "/article/catgory",
+                  "href": "/article/category",
                   "icon": "fa fa-list",
                   "target": "_self"
               },

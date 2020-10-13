@@ -21,8 +21,8 @@
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <![endif]-->
+
     <style id="layuimini-bg-color">
     </style>
 </head>
@@ -54,6 +54,7 @@
 
                 <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:;" data-refresh="刷新"><i class="fa fa-refresh"></i></a>
+                    <div id="refresh" style="display: none"></div>
                 </li>
                 {{--<li class="layui-nav-item" lay-unselect>
                     <a href="javascript:;" data-clear="清理" class="layuimini-clear"><i class="fa fa-trash-o"></i></a>
@@ -118,6 +119,7 @@
 </div>
 <script src="{{asset('static/lib/layui-v2.5.5/layui.js')}}" charset="utf-8"></script>
 <script src="{{asset('static/js/lay-config.js?v=2.0.0')}}" charset="utf-8"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script>
     layui.use(['jquery', 'layer', 'miniAdmin', 'miniTongji'], function () {
         var $ = layui.jquery,

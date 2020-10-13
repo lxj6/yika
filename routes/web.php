@@ -29,9 +29,10 @@ Route::group(['middleware'=>'check.login'],function(){
     Route::any('system/index',"SystemController@index");
 
     Route::any('article/index',"ArticleController@index");
-    Route::any('article/catgory',"ArticleController@catgory");
+    Route::any('article/category',"ArticleController@category");
     Route::any('article/add_article',"ArticleController@add_article");
-    Route::any('article/add_catgory',"ArticleController@add_catgory");
+    Route::any('article/add_category',"ArticleController@add_category");
+    Route::any('article/edit_category',"ArticleController@edit_category");
 
     Route::any('banner/index',"BannerController@index");
     Route::any('message/index',"MessageController@index");

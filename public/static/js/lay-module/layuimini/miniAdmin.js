@@ -262,6 +262,10 @@ layui.define(["jquery", "miniMenu", "element","miniPage", "miniTheme"], function
                 miniAdmin.success('刷新成功');
             });
 
+            $('#refresh').on('click',function(){
+                miniPage.refresh(options);
+            });
+
             /**
              * 监听提示信息
              */

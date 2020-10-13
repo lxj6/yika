@@ -6,64 +6,47 @@
 
         <div class="layui-form layuimini-form">
             <div class="layui-form-item">
-                <label class="layui-form-label required">网站名称</label>
-                <div class="layui-input-block">
-                    <input type="text" name="sitename" lay-verify="required" lay-reqtext="网站域名不能为空" placeholder="请输入网站名称"  value="layuimini" class="layui-input">
-                    <tip>填写自己部署网站的名称。</tip>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label required">网站域名</label>
-                <div class="layui-input-block">
-                    <input type="text" name="domain" lay-verify="required" lay-reqtext="网站域名不能为空" placeholder="请输入网站域名"  value="http://layuimini.99php.cn" class="layui-input">
-                </div>
-            </div>
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">缓存时间</label>
-                <div class="layui-input-inline" style="width: 80px;">
-                    <input type="text" name="cache" lay-verify="number" value="0" class="layui-input">
-                </div>
-                <div class="layui-input-inline layui-input-company">分钟</div>
-                <div class="layui-form-mid layui-word-aux">本地开发一般推荐设置为 0，线上环境建议设置为 10。</div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">最大文件上传</label>
-                <div class="layui-input-inline" style="width: 80px;">
-                    <input type="text" name="cache" lay-verify="number" value="2048" class="layui-input">
-                </div>
-                <div class="layui-input-inline layui-input-company">KB</div>
-                <div class="layui-form-mid layui-word-aux">提示：1 M = 1024 KB</div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">上传文件类型</label>
-                <div class="layui-input-block">
-                    <input type="text" name="cache" value="png|gif|jpg|jpeg|zip|rar" class="layui-input">
-                </div>
-            </div>
-
-            <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label required">首页标题</label>
                 <div class="layui-input-block">
-                    <textarea name="title" class="layui-textarea">layuimini 简洁易用后台管理模板</textarea>
+                    <input type="text" name="title" lay-verify="required" lay-reqtext="首页标题不能为空" placeholder="请输入首页标题"  value="{{$conf->title}}" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">META关键词</label>
                 <div class="layui-input-block">
-                    <textarea name="keywords" class="layui-textarea" placeholder="多个关键词用英文状态 , 号分割"></textarea>
+                    <textarea name="keywords" class="layui-textarea" placeholder="多个关键词用英文状态|号分割">{{$conf->keywords}}</textarea>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">META描述</label>
                 <div class="layui-input-block">
-                    <textarea name="descript" class="layui-textarea">layuimini，最简洁、清爽、易用的layui后台框架模板。</textarea>
+                    <textarea name="descript" class="layui-textarea">{{$conf->descript}}</textarea>
                 </div>
             </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">公司名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cor_name" value="{{$conf->cor_name}}" lay-verify="required" lay-reqtext="公司名称不能为空" placeholder="请输入公司名称"   class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">联系电话</label>
+                <div class="layui-input-block">
+                    <input type="text" name="phone" value="{{$conf->phone}}" lay-verify="required" lay-reqtext="联系电话不能为空" placeholder="请输入联系电话"   class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">联系地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="address" value="{{$conf->address}}" lay-verify="required" lay-reqtext="联系地址不能为空" placeholder="请输入联系地址"   class="layui-input">
+                </div>
+            </div>
+
+
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label required">版权信息</label>
                 <div class="layui-input-block">
-                    <textarea name="copyright" class="layui-textarea">© 2019 layuimini.99php.cn MIT license</textarea>
+                    <textarea name="copyright" class="layui-textarea">{{$conf->copyright}}</textarea>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -86,10 +69,30 @@
 
         //监听提交
         form.on('submit(setting)', function (data) {
-            parent.layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': "{{csrf_token()}}"
+                },
+                url: '{{url('system/index')}}', //请求的url地址
+                dataType: "json", //返回格式为json
+                async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                data:  data.field , //参数值
+                method: "POST", //请求方式
+                success: function(res) {
+                    if(res.code == 200){
+                        layer.msg(res.msg);
+                    }else{
+                        layer.msg(res.msg);
+                    }
+
+                },
+                error: function() {
+
+                    //请求出错处理
+
+                }
             });
-            return false;
         });
 
     });

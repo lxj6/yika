@@ -117,35 +117,50 @@
                     <li class="layui-timeline-item">
                         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                         <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">8月18日</h3>
+                            <h3 class="layui-timeline-title">2018年</h3>
                             <p>
-                                layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-                                <br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-                                <br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
+                                创建网络金融公司
+                                <br>确定方向，成立北京易巨网络科技有限公司
                             </p>
                         </div>
                     </li>
                     <li class="layui-timeline-item">
                         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                         <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">8月16日</h3>
-                            <p>杜甫的思想核心是儒家的仁政思想，他有“<em>致君尧舜上，再使风俗淳</em>”的宏伟抱负。个人最爱的名篇有：</p>
-                            <ul>
-                                <li>《登高》</li>
-                                <li>《茅屋为秋风所破歌》</li>
-                            </ul>
+                            <h3 class="layui-timeline-title">2017年</h3>
+                            <p>
+                                目标确定
+                                <br>业务不断扩大，调整方向，进军互联网
+                            </p>
                         </div>
                     </li>
                     <li class="layui-timeline-item">
                         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                         <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">8月15日</h3>
+                            <h3 class="layui-timeline-title">2016年</h3>
                             <p>
-                                中国人民抗日战争胜利72周年
-                                <br>常常在想，尽管对这个国家有这样那样的抱怨，但我们的确生在了最好的时代
-                                <br>铭记、感恩
-                                <br>所有为中华民族浴血奋战的英雄将士
-                                <br>永垂不朽
+                                方向调整
+                                <br>由短期贷款转为信用卡及线下支付业务
+                            </p>
+                        </div>
+                    </li>
+                    <li class="layui-timeline-item">
+                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text">
+                            <h3 class="layui-timeline-title">2015年</h3>
+                            <p>
+                                成立公司
+                                <br/>合伙人成立金融公司，并针对不同人群定制理财计划
+                            </p>
+                        </div>
+                    </li>
+                    <li class="layui-timeline-item">
+                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text">
+                            <h3 class="layui-timeline-title">2014年</h3>
+                            <p>
+                                筹备计划
+                                <br>公司几位主要合伙人开始接触金融领域
                             </p>
                         </div>
                     </li>

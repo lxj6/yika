@@ -46,7 +46,7 @@
             <div class="layui-table-tool">
                 <div class="layui-table-tool-temp">
                     <div class="layui-btn-container">
-                        <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" id="add"> 添加文章 </button>
+                        <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" id="add_art"> 添加文章 </button>
                         <button class="layui-btn layui-btn-sm data-add-btn" id="check"> 批量选中 </button>
                         <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" id="delete"> 批量删除 </button>
                     </div>
@@ -230,9 +230,9 @@
 
 
         //添加文章
-        $(document).on('click','#add_art',function(){
+        $('#add_art').on('click',function(){
             console.log(11);
-            var content = miniPage.getHrefContent('{{asset('/article/add_article')}}');
+            var content = miniPage.getHrefContent('{{asset('article/add_article')}}');
             var openWH = miniPage.getOpenWidthHeight();
 
             var index = layer.open({
@@ -251,8 +251,8 @@
             });
         });
         //编辑分类
-        $(document).on('click','#edit_art',function(){
-            var content = miniPage.getHrefContent('{{asset('/article/add_article')}}');
+        $(#edit_art).on('click',function(){
+            var content = miniPage.getHrefContent('{{asset('article/add_article')}}');
             var openWH = miniPage.getOpenWidthHeight();
 
             var index = layer.open({
@@ -270,7 +270,7 @@
             });
         });
 
-        $(document).on('click','#check',function(){
+        $('#check').on('click',function(){
             layer.confirm('真的删除行么', function (index) {
                 obj.del();
                 layer.close(index);
@@ -280,7 +280,7 @@
             layer.alert(JSON.stringify(data));
         });
 
-        $(document).on('click','#delete_art',function(){
+        $('#delete_art').on('click',function(){
             layer.confirm('真的删除行么', function (index) {
                 obj.del();
                 layer.close(index);

@@ -3,15 +3,11 @@
 
 
 
-
-
-
-
         <div class="layui-form layui-border-box layui-table-view" lay-filter="LAY-table-2" lay-id="currentTableId" style=" ">
             <div class="layui-table-tool">
                 <div class="layui-table-tool-temp">
                     <div class="layui-btn-container">
-                        <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" id="add"> 添加分类 </button>
+                        <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" id="add_category"> 添加分类 </button>
                     </div>
                 </div>
             </div>
@@ -35,21 +31,27 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($cats as $cat)
                         <tr data-index="0" class="">
                             <td data-field="id" data-key="2-0-1" class="">
                                 <div class="layui-table-cell laytable-cell-2">
-                                    10000
+                                    {{$cat->name}}
                                 </div></td>
                             <td data-field="username" data-key="2-0-2" class="">
                                 <div class="layui-table-cell laytable-cell-3">
-                                    user-0
+                                    @if($cat->issys == 1)
+                                    是
+                                    @else
+                                    否
+                                    @endif
                                 </div></td>
                             <td data-field="10" data-key="2-0-10" align="center" data-off="true" data-minwidth="150" class="layui-table-col-special">
-                                <div class="layui-table-cell laytable-cell-7">
-                                    <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" id="edit">编辑</a>
+                                <div class="layui-table-cell laytable-cell-7" data-id="{{$cat->id}}">
+                                    <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" id="edit_category">编辑</a>
                                     <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" id="delete">删除</a>
                                 </div></td>
                         </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -73,13 +75,15 @@
 
 
         //添加分类
-        $(document).on('click','#add',function(){
-            var content = miniPage.getHrefContent('{{asset('/article/add_catgory')}}');
+        $('#add_category').on('click',function(){
+            console.log('test');
+            var content = miniPage.getHrefContent('{{asset('/article/add_category')}}');
             var openWH = miniPage.getOpenWidthHeight();
 
             var index = layer.open({
-                title: '添加用户',
+                title: '添加分类',
                 type: 1,
+                id:'ADD_CATEGORY',
                 shade: 0.2,
                 maxmin:true,
                 shadeClose: true,
@@ -92,12 +96,13 @@
             });
         });
         //编辑分类
-        $(document).on('click','#edit',function(){
-            var content = miniPage.getHrefContent('{{asset('/article/add_catgory')}}');
+        $('#edit_category').on('click',function(){
+            var id = this.parentNode.getAttribute('data-id');
+            var content = miniPage.getHrefContent('{{asset('/article/edit_category?id=')}}'+id);
             var openWH = miniPage.getOpenWidthHeight();
 
             var index = layer.open({
-                title: '添加用户',
+                title: '编辑分类',
                 type: 1,
                 shade: 0.2,
                 maxmin:true,
