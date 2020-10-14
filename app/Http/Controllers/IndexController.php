@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 
 use App\Admin;
 use App\Article;
+use App\ArticleCategory;
 use App\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends BaseController
 {
@@ -17,7 +19,7 @@ class IndexController extends BaseController
 
 
     public function index(){
-        return view('\index\index');
+        return view('index/index');
     }
 
     public function welcome(){
@@ -26,8 +28,9 @@ class IndexController extends BaseController
             'user' => count($res),
             'art' => Article::count(),
             'msg' => Message::count(),
+            'cat' => ArticleCategory::count(),
         ];
-        return view('\index\welcome',['users'=>$res,'count'=>$count]);
+        return view('index/welcome',['users'=>$res,'count'=>$count]);
     }
 
     public function update_pass(Request $request){
@@ -50,7 +53,47 @@ class IndexController extends BaseController
             }
 
         }
-        return view('index\update_pass');
+        return view('index/update_pass');
+    }
+
+
+    public function upload(Request $request){
+
+        $file = $request->file('image');
+        // 文件是否上传成功
+        if ($file->isValid()) {
+
+            $ext = $file->getClientOriginalExtension();     // 扩展名
+            // 拼接文件名称
+            $imgPath = public_path('upload/');
+            $filename =  date('YmdHis').mt_rand(1000,9999).'.'.$ext;
+
+            $path = $file->move($imgPath,$filename);
+            if($path){
+                $img_path = asset('upload').'/'.$filename;
+                DB::table('upload_log')->insert(['img_path'=>$img_path,'insert_time'=>date('Y-m-d H:i:s')]);
+                $return = [
+                    'code' => 200,
+                    'msg' => '上传成功',
+                    'data' => [
+                        'url' => $img_path,
+                    ],
+                ];
+                return response()->json($return);
+            }else{
+                $return = [
+                    'code' => 0,
+                    'msg' => '上传失败',
+                ];
+                return response()->json($return);
+            }
+        }else{
+            $return = [
+                'code' => 0,
+                'msg' => '上传失败,文件不合法',
+            ];
+            return response()->json($return);
+        }
     }
 
 }

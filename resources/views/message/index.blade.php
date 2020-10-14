@@ -1,7 +1,7 @@
 <div class="layuimini-container layuimini-page-anim">
     <div class="layuimini-main">
 
-        <fieldset class="table-search-fieldset">
+        {{--<fieldset class="table-search-fieldset">
             <legend>搜索信息</legend>
             <div style="margin: 10px 10px 10px 10px">
                 <form class="layui-form layui-form-pane" action="">
@@ -36,68 +36,43 @@
                     </div>
                 </form>
             </div>
-        </fieldset>
+        </fieldset>--}}
 
 
 
 
 
         <div class="layui-form layui-border-box layui-table-view" lay-filter="LAY-table-2" lay-id="currentTableId" style=" ">
-            <div class="layui-table-tool">
-                <div class="layui-table-tool-temp">
-                    <div class="layui-btn-container">
-                        <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" id="add"> 添加文章 </button>
-                        <button class="layui-btn layui-btn-sm data-add-btn" id="check"> 批量选中 </button>
-                        <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" id="delete"> 批量删除 </button>
-                    </div>
-                </div>
-                {{--<div class="layui-table-tool-self">
-                    <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
-                        <i class="layui-icon layui-icon-cols"></i>
-                    </div>
-                    <div class="layui-inline" title="导出" lay-event="LAYTABLE_EXPORT">
-                        <i class="layui-icon layui-icon-export"></i>
-                    </div>
-                    <div class="layui-inline" title="打印" lay-event="LAYTABLE_PRINT">
-                        <i class="layui-icon layui-icon-print"></i>
-                    </div>
-                    <div class="layui-inline" title="提示" lay-event="LAYTABLE_TIPS">
-                        <i class="layui-icon layui-icon-tips"></i>
-                    </div>
-                </div>--}}
-            </div>
+
             <div class="layui-table-box">
                 <div class="layui-table-header">
                     <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line" style="width:100%">
                         <thead>
                         <tr>
-                            <th data-field="0" data-key="2-0-0" data-unresize="true" class=" layui-table-col-special">
-                                <div class="layui-table-cell laytable-cell-1 laytable-cell-checkbox">
-                                    <input type="checkbox" name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose" />
-                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                        <i class="layui-icon layui-icon-ok"></i>
-                                    </div>
-                                </div></th>
                             <th data-field="id" data-key="2-0-1">
                                 <div class="layui-table-cell laytable-cell-2">
                                     <span>ID</span>
                                 </div></th>
                             <th data-field="username" data-key="2-0-2">
                                 <div class="layui-table-cell laytable-cell-3">
-                                    <span>标题</span>
+                                    <span>手机号</span>
                                 </div></th>
                             <th data-field="score" data-key="2-0-7" >
                                 <div class="layui-table-cell laytable-cell-4">
-                                    <span>分类</span>
+                                    <span>备注</span>
                                 </div></th>
                             <th data-field="classify" data-key="2-0-8" class="">
                                 <div class="layui-table-cell laytable-cell-5">
-                                    <span>发布时间</span>
+                                    <span>是否回访</span>
                                 </div></th>
                             <th data-field="wealth" data-key="2-0-9" class="layui-unselect">
                                 <div class="layui-table-cell laytable-cell-6">
-                                    <span>展示</span>
-                                    <span class="layui-table-sort layui-inline"><i class="layui-edge layui-table-sort-asc" title="升序"></i><i class="layui-edge layui-table-sort-desc" title="降序"></i></span>
+                                    <span>是否有意向</span>
+
+                                </div></th>
+                            <th data-field="wealth" data-key="2-0-9" class="layui-unselect">
+                                <div class="layui-table-cell laytable-cell-6">
+                                    <span>留言时间</span>
                                 </div></th>
                             <th data-field="10" data-key="2-0-10" data-minwidth="150" class=" layui-table-col-special">
                                 <div class="layui-table-cell laytable-cell-7" align="center">
@@ -106,80 +81,57 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($msgs as $msg)
                         <tr data-index="0" class="">
-                            <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                <div class="layui-table-cell laytable-cell-1 laytable-cell-checkbox">
-                                    <input type="checkbox" name="layTableCheckbox" lay-skin="primary" />
-                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                        <i class="layui-icon layui-icon-ok"></i>
-                                    </div>
-                                </div></td>
                             <td data-field="id" data-key="2-0-1" class="">
                                 <div class="layui-table-cell laytable-cell-2">
-                                    10000
+                                    {{$msg->id}}
                                 </div></td>
                             <td data-field="username" data-key="2-0-2" class="">
                                 <div class="layui-table-cell laytable-cell-3">
-                                    user-0
+                                    {{$msg->phone}}
                                 </div></td>
                             <td data-field="sex" data-key="2-0-3" class="">
                                 <div class="layui-table-cell laytable-cell-4">
-                                    女
+                                    {{$msg->detail}}
                                 </div></td>
                             <td data-field="city" data-key="2-0-4" class="">
                                 <div class="layui-table-cell laytable-cell-5">
-                                    城市-0
+                                    @if($msg->is_return == 0)
+                                        否
+                                    @else
+                                        是
+                                    @endif
                                 </div></td>
                             <td data-field="sign" data-key="2-0-5" data-minwidth="150" class="">
                                 <div class="layui-table-cell laytable-cell-6">
-                                    签名-0
-                                </div></td>
-                            <td data-field="10" data-key="2-0-10" align="center" data-off="true" data-minwidth="150" class="layui-table-col-special">
-                                <div class="layui-table-cell laytable-cell-7">
-                                    <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" id="edit">编辑</a>
-                                    <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" id="delete">删除</a>
-                                </div></td>
-                        </tr>
-                        <tr data-index="0" class="">
-                            <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                <div class="layui-table-cell laytable-cell-1 laytable-cell-checkbox">
-                                    <input type="checkbox" name="layTableCheckbox" lay-skin="primary" />
-                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                        <i class="layui-icon layui-icon-ok"></i>
-                                    </div>
-                                </div></td>
-                            <td data-field="id" data-key="2-0-1" class="">
-                                <div class="layui-table-cell laytable-cell-2">
-                                    10000
-                                </div></td>
-                            <td data-field="username" data-key="2-0-2" class="">
-                                <div class="layui-table-cell laytable-cell-3">
-                                    user-0
+                                    @if($msg->is_interest == 0)
+                                        未知
+                                        @elseif($msg->is_interest == 1)
+                                        有
+                                    @else
+                                        没有
+                                    @endif
                                 </div></td>
                             <td data-field="sex" data-key="2-0-3" class="">
                                 <div class="layui-table-cell laytable-cell-4">
-                                    女
-                                </div></td>
-                            <td data-field="city" data-key="2-0-4" class="">
-                                <div class="layui-table-cell laytable-cell-5">
-                                    城市-0
-                                </div></td>
-                            <td data-field="sign" data-key="2-0-5" data-minwidth="150" class="">
-                                <div class="layui-table-cell laytable-cell-6">
-                                    签名-0
+                                    {{$msg->created_at}}
                                 </div></td>
                             <td data-field="10" data-key="2-0-10" align="center" data-off="true" data-minwidth="150" class="layui-table-col-special">
                                 <div class="layui-table-cell laytable-cell-7">
-                                    <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" id="edit">编辑</a>
-                                    <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" id="delete">删除</a>
+                                    <a class="layui-btn layui-btn-xs data-count-edit" id="edit">已回访</a>
+                                    <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit">有意向</a>
+                                    <a class="layui-btn layui-btn-xs layui-btn-warm data-count-delete">无意向</a>
+                                    <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete">删除</a>
                                 </div></td>
                         </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="layui-table-page">
-                <div id="layui-table-page2">
+                {{--<div id="layui-table-page2">
                     <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-2">
                         <a href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0"><i class="layui-icon"></i></a>
                         <span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>
@@ -192,7 +144,7 @@
                         <span class="layui-laypage-count">共 1000 条</span>
                         <span class="layui-laypage-limits"><select lay-ignore=""><option value="10">10 条/页</option><option value="15" selected="">15 条/页</option><option value="20">20 条/页</option><option value="25">25 条/页</option><option value="50">50 条/页</option><option value="100">100 条/页</option></select></span>
                     </div>
-                </div>
+                </div>--}}
             </div>
         </div>
 

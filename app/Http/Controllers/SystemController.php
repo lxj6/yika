@@ -22,6 +22,6 @@ class SystemController extends BaseController
 
         }
         $res = AdminConf::first();
-        return view('system\index',['conf'=>$res]);
+        return view('system/index',['conf'=>$res]);
     }
 }

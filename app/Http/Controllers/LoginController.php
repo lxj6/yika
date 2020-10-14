@@ -31,7 +31,7 @@ class LoginController extends BaseController
             return response()->json($data);
 
         }
-        return view("login\login");
+        return view("login/login");
     }
 
     public function out(Request $request){

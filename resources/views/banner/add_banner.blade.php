@@ -2,54 +2,39 @@
 
     <div class="layui-form layuimini-form">
         <div class="layui-form-item">
-            <label class="layui-form-label required">上级分类</label>
+            <label class="layui-form-label required">所属位置</label>
             <div class="layui-input-block">
-                <select name="parent_id" lay-filter="aihao">
-                    <option value="0">顶级分类</option>
+                <select name="position" lay-filter="aihao">
+                    @foreach($position as $k => $v)
+                    <option value="{{$k}}">{{$v}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">名称</label>
-            <div class="layui-input-block">
-                <input type="text" name="name" placeholder="请输入名称" value="" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label required">是否为系统分类</label>
-            <div class="layui-input-block">
-                <input type="radio" name="issys" value="0" title="否" checked="">
-                <input type="radio" name="issys" value="1" title="是">
-            </div>
-            <tip>系统分类前台不展示，仅作为不可见的文章分类，主要是给管理员归纳文章使用的。</tip>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">排序</label>
-            <div class="layui-input-block">
-                <input type="number" name="sort" value="0" class="layui-input">
-            </div>
-        </div>
-
 
         <div class="layui-form-item">
-            <label class="layui-form-label">标题(SEO)</label>
+            <label class="layui-form-label">标题</label>
             <div class="layui-input-block">
                 <input type="text" name="title" placeholder="请输入标题" value="" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">关键词(SEO)</label>
-            <div class="layui-input-block">
-                <input type="text" name="keywords" placeholder="请输入关键词" value="" class="layui-input">
-            </div>
-        </div>
         <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">描述简要(SEO)</label>
+            <label class="layui-form-label">图片路径</label>
             <div class="layui-input-block">
-                <input type="text" name="description" placeholder="请输描述简要" value="" class="layui-input">
+                <input type="text" name="url" placeholder="请输入图片跳转路径" value="" class="layui-input">
             </div>
         </div>
 
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">广告图片</label>
+            <div class="layui-input-block">
+                <div class="layui-upload-drag" id="up">
+                    <i class="layui-icon"></i>
+                    <p>点击上传，或将文件拖拽到此处</p>
+                </div>
+            </div>
+        </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
@@ -58,11 +43,33 @@
     </div>
 </div>
 <script>
-    layui.use(['form', 'table'], function () {
+
+    layui.use('upload', function(){
+        var $ = layui.jquery
+            ,upload = layui.upload;
+        //拖拽上传
+        upload.render({
+            elem: '#up',
+            url: "{{url('index/upload')}}",
+            field:'image',
+            done: function(res){
+                if(res.code == 200){
+                    document.getElementById('up').className = '';
+                    document.getElementById('up').innerHTML = "<img src="+res.data.url+" height='135px' width = '258px'>";
+                    document.getElementById('imgUrl').value = res.data.url;
+                }else{
+                    layer.msg(res.msg);
+                }
+            }
+        });
+    });
+
+    layui.use(['form', 'table','wangEditor'], function () {
         var form = layui.form,
             layer = layui.layer,
             table = layui.table,
-            $ = layui.$;
+            $ = layui.$,
+            $ = layui.jquery;
 
         /**
          * 初始化表单，要加上，不然刷新部分组件可能会不加载
@@ -75,11 +82,12 @@
         //监听提交
         form.on('submit(saveBtn)', function (data) {
 
+            data.field.path = $("#up>img").attr("src");;
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': "{{csrf_token()}}"
                 },
-                url: '{{url('article/add_category')}}', //请求的url地址
+                url: '{{url('banner/add_banner')}}', //请求的url地址
                 dataType: "json", //返回格式为json
                 async: true, //请求是否异步，默认为异步，这也是ajax重要特性
                 data:  data.field , //参数值
@@ -90,7 +98,6 @@
                             icon: 1,
                             time: 1000 //2秒关闭（如果不配置，默认是3秒）
                         },function () {
-                            //layer.close(index);
                             layer.close(parentIndex);
                             $('#refresh').click();
                         });

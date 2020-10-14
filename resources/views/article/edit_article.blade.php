@@ -14,9 +14,10 @@
         <div class="layui-form-item">
             <label class="layui-form-label required">标题</label>
             <div class="layui-input-block">
-                <input type="text" name="title" lay-verify="required" lay-reqtext="标题不能为空" placeholder="标题" value="" class="layui-input">
+                <input type="text" name="title" lay-verify="required" lay-reqtext="标题不能为空" placeholder="标题" value="{{$info->title}}" class="layui-input">
             </div>
         </div>
+        <input type="hidden" name="id" value="{{$info->id}}">
         <div class="layui-form-item">
             <label class="layui-form-label required">是否推荐</label>
             <div class="layui-input-block">
@@ -27,14 +28,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">排序</label>
             <div class="layui-input-block">
-                <input type="number" name="sort" value="0" class="layui-input">
+                <input type="number" name="sort" value="{{$info->sort}}" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">内容</label>
             <div class="layui-input-block">
                 <div id="editor" style="margin: 50px 0 50px 0">
-
+                    {!! $info->content !!}
                 </div>
             </div>
         </div>
@@ -43,13 +44,13 @@
         <div class="layui-form-item">
             <label class="layui-form-label">关键词(SEO)</label>
             <div class="layui-input-block">
-                <input type="text" name="keywords" placeholder="请输入关键词" value="" class="layui-input">
+                <input type="text" name="keywords" placeholder="请输入关键词" value="{{$info->keywords}}" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">描述简要(SEO)</label>
             <div class="layui-input-block">
-                <input type="text" name="description" placeholder="请输描述简要" value="" class="layui-input">
+                <input type="text" name="description" placeholder="请输描述简要" value="{{$info->description}}" class="layui-input">
             </div>
         </div>
 
@@ -116,7 +117,7 @@
                 headers: {
                     'X-CSRF-TOKEN': "{{csrf_token()}}"
                 },
-                url: '{{url('article/add_article')}}', //请求的url地址
+                url: '{{url('article/edit_article')}}', //请求的url地址
                 dataType: "json", //返回格式为json
                 async: true, //请求是否异步，默认为异步，这也是ajax重要特性
                 data:  data.field , //参数值

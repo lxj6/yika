@@ -29,23 +29,7 @@
                 </div>
             </div>
 
-            <div class="layui-col-md3">
-                <div class="col-xs-6 col-md-3">
-                    <div class="panel layui-bg-blue">
-                        <div class="panel-body">
-                            <div class="panel-title">
-                                <span class="label pull-right layui-bg-cyan">实时</span>
-                                <h5>文章</h5>
-                            </div>
-                            <div class="panel-content">
-                                <h1 class="no-margins">{{$count['art']}}</h1>
-                                <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i>{{$count['art']}}</div>
-                                <small>当前后台总文章记录数</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             <div class="layui-col-md3">
                 <div class="col-xs-6 col-md-3">
@@ -70,12 +54,30 @@
                         <div class="panel-body">
                             <div class="panel-title">
                                 <span class="label pull-right layui-bg-green">实时</span>
-                                <h5>订单统计</h5>
+                                <h5>分类数</h5>
                             </div>
                             <div class="panel-content">
-                                <h1 class="no-margins">1234</h1>
-                                <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i> 1234</div>
-                                <small>当前分类总记录数</small>
+                                <h1 class="no-margins">{{$count['cat']}}</h1>
+                                <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i>{{$count['cat']}}</div>
+                                <small>当前后台类别</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-md3">
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel layui-bg-blue">
+                        <div class="panel-body">
+                            <div class="panel-title">
+                                <span class="label pull-right layui-bg-cyan">实时</span>
+                                <h5>文章</h5>
+                            </div>
+                            <div class="panel-content">
+                                <h1 class="no-margins">{{$count['art']}}</h1>
+                                <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i>{{$count['art']}}</div>
+                                <small>当前后台总文章记录数</small>
                             </div>
                         </div>
                     </div>
