@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Admin;
+use App\AdminConf;
 use App\Article;
 use App\ArticleCategory;
 use App\Message;
@@ -94,6 +95,11 @@ class IndexController extends BaseController
             ];
             return response()->json($return);
         }
+    }
+
+    public function getConfig(Request $request){
+        $config = AdminConf::first()->toArray();
+        return response()->json(['code' => 200 , 'msg' => '请求成功' , 'data' => $config]);
     }
 
 }

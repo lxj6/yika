@@ -96,4 +96,28 @@ class ArticleController extends BaseController
         return view('article/edit_category',['info'=>$info]);
     }
 
+    public function articleList(){
+        $arts = Article::select('id','title','keywords','description')->orderBy('created_at','DESC')->paginate(10);
+        if($arts){
+            return response()->json(['code'=>200,'msg'=>'请求成功','data'=>$arts]);
+        }
+    }
+
+    public function indexArticleList(){
+        $arts = Article::select('id','title','keywords','description')->orderBy('created_at','DESC')->limit(3)->get();
+        if($arts){
+            return response()->json(['code'=>200,'msg'=>'请求成功','data'=>$arts]);
+        }
+    }
+
+    public function articleInfo(Request $request){
+        if($request->input('id')){
+            $res = Article::find($request->input('id'));
+            if($res){
+                $res = $res->toArray();
+                $res['content'] = htmlspecialchars_decode($res['content']);
+                return response()->json(['code' => 200 ,'msg' => '请求成功' , 'data' => $res]);
+            }
+        }
+    }
 }

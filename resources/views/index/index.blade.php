@@ -121,6 +121,12 @@
 <script src="{{asset('static/js/lay-config.js?v=2.0.0')}}" charset="utf-8"></script>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script>
+    window.onload = function(){
+        if(window.location.hash){
+            window.location = '{{url('index')}}';
+        }
+
+    }
     layui.use(['jquery', 'layer', 'miniAdmin', 'miniTongji'], function () {
         var $ = layui.jquery,
             layer = layui.layer,

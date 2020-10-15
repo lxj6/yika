@@ -65,7 +65,6 @@
 
     </div>
 </div>
-
 <script>
     layui.use(['form', 'table','miniPage','element'], function () {
         var $ = layui.jquery,

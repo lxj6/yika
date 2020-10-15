@@ -35,5 +35,17 @@ class BannerController extends BaseController
         Banner::destroy($id);
         return response()->json(['code'=>200,'msg'=>'删除成功']);
     }
+
+    public function getBanner(Request $request){
+
+        if($request->input('position')){
+            $banners = Banner::where('position',$request->input('position'))->get(['title','url','path']);
+            if($banners){
+                $banners = $banners->toArray();
+                return response()->json(['code'=>200,'msg'=>'请求成功','data'=>['url' => $banners]]);
+            }
+        }
+
+    }
 }
 
