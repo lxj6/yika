@@ -8,5 +8,7 @@ class Message extends Model
 {
 
     protected $table = 'message';
+
+    protected $fillable = ['name','phone','detail'];
 }
 

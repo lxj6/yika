@@ -29,6 +29,9 @@ Route::group(['middleware' => 'check.api'],function(){
 
     Route::get('articleList',"ArticleController@articleList");
 
+    Route::get('sendSms',"MessageController@sendSms");
+
+    Route::get('submitMsg',"MessageController@submitMsg");
 
 
 });

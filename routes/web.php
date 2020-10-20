@@ -41,6 +41,9 @@ Route::group(['middleware'=>'check.login'],function(){
     Route::any('banner/add_banner',"BannerController@add_banner");
     Route::post('banner/del_banner',"BannerController@del_banner");
     Route::any('message/index',"MessageController@index");
+    Route::any('message/change_return',"MessageController@change_return");
+    Route::any('message/change_interest',"MessageController@change_interest");
+    Route::any('message/del_msg',"MessageController@del_msg");
 
 
     Route::post('login/out',"LoginController@out");

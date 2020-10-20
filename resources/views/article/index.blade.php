@@ -257,25 +257,6 @@
                 });
             })
         });
-        $('#check').on('click',function(){
-            layer.confirm('真的删除行么', function (index) {
-                obj.del();
-                layer.close(index);
-            });
-            var checkStatus = table.checkStatus('currentTableId')
-                , data = checkStatus.data;
-            layer.alert(JSON.stringify(data));
-        });
-
-        $('#delete_art').on('click',function(){
-            layer.confirm('真的删除行么', function (index) {
-                obj.del();
-                layer.close(index);
-            });
-            var checkStatus = table.checkStatus('currentTableId')
-                , data = checkStatus.data;
-            layer.alert(JSON.stringify(data));
-        });
 
 
     });

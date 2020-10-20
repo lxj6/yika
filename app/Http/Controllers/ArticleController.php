@@ -17,7 +17,7 @@ class ArticleController extends BaseController
             $map[] = ['title','like',"%{$request->input('title')}%"];
         }
 
-        $arts = Article::with('articleCat')->where($map)->select(['id','title','category_id','created_at'])->paginate(20);
+        $arts = Article::with('articleCat')->where($map)->select(['id','title','category_id','created_at'])->orderBy('created_at','DESC')->paginate(20);
 
         $arts->withPath('/article/index');
         return view('article/index',['arts'=>$arts]);

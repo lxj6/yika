@@ -32,6 +32,9 @@
         }
     },
     "autoload": {
+        "files" : [
+            "app/Libs/common_func.php"
+        ],
         "psr-4": {
             "App\\": "app/"
         },

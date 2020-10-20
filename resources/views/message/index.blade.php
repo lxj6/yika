@@ -110,7 +110,7 @@
                                         @elseif($msg->is_interest == 1)
                                         有
                                     @else
-                                        没有
+                                        否
                                     @endif
                                 </div></td>
                             <td data-field="sex" data-key="2-0-3" class="">
@@ -118,11 +118,11 @@
                                     {{$msg->created_at}}
                                 </div></td>
                             <td data-field="10" data-key="2-0-10" align="center" data-off="true" data-minwidth="150" class="layui-table-col-special">
-                                <div class="layui-table-cell laytable-cell-7">
-                                    <a class="layui-btn layui-btn-xs data-count-edit" id="edit">已回访</a>
-                                    <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit">有意向</a>
-                                    <a class="layui-btn layui-btn-xs layui-btn-warm data-count-delete">无意向</a>
-                                    <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete">删除</a>
+                                <div class="layui-table-cell laytable-cell-7" data-id="{{$msg->id}}">
+                                    <a class="layui-btn layui-btn-xs data-count-edit return">已回访</a>
+                                    <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit intention">有意向</a>
+                                    <a class="layui-btn layui-btn-xs layui-btn-warm data-count-delete no-intention">无意向</a>
+                                    <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete del">删除</a>
                                 </div></td>
                         </tr>
                         @endforeach
@@ -131,8 +131,9 @@
                 </div>
             </div>
             <div class="layui-table-page">
-                {{--<div id="layui-table-page2">
-                    <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-2">
+                <div id="layui-table-page2">
+                    {{$msgs->links()}}
+                    {{--<div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-2">
                         <a href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0"><i class="layui-icon"></i></a>
                         <span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>
                         <a href="javascript:;" data-page="2">2</a>
@@ -143,8 +144,22 @@
                         <span class="layui-laypage-skip">到第<input type="text" min="1" value="1" class="layui-input" />页<button type="button" class="layui-laypage-btn">确定</button></span>
                         <span class="layui-laypage-count">共 1000 条</span>
                         <span class="layui-laypage-limits"><select lay-ignore=""><option value="10">10 条/页</option><option value="15" selected="">15 条/页</option><option value="20">20 条/页</option><option value="25">25 条/页</option><option value="50">50 条/页</option><option value="100">100 条/页</option></select></span>
-                    </div>
-                </div>--}}
+                    </div>--}}
+                </div>
+                <style>
+                    .pagination li{
+                        float:left;
+                        padding:0 12px;
+                        height: 26px;
+                        line-height: 26px;
+                        margin-bottom: 10px;
+                        cursor:pointer;
+                    }
+                    .pagination .active{
+                        background-color: #009688;
+                        color:#fff;
+                    }
+                </style>
             </div>
         </div>
 
@@ -180,67 +195,137 @@
             return false;
         });
 
+        $('.return').each(function(){
 
-        //添加文章
-        $(document).on('click','#add_art',function(){
-            console.log(11);
-            var content = miniPage.getHrefContent('{{asset('/article/add_article')}}');
-            var openWH = miniPage.getOpenWidthHeight();
+            $(this).on('click',function(){
+                var id = this.parentNode.getAttribute('data-id');
 
-            var index = layer.open({
-                title: '添加用户',
-                type: 1,
-                shade: 0.2,
-                id: 'add_article',
-                maxmin:true,
-                shadeClose: true,
-                area: [openWH[0] + 'px', openWH[1] + 'px'],
-                offset: [openWH[2] + 'px', openWH[3] + 'px'],
-                content: content,
-            });
-            $(window).on("resize", function () {
-                layer.full(index);
-            });
-        });
-        //编辑分类
-        $(document).on('click','#edit_art',function(){
-            var content = miniPage.getHrefContent('{{asset('/article/add_article')}}');
-            var openWH = miniPage.getOpenWidthHeight();
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': "{{csrf_token()}}"
+                        },
+                        url: '{{url('message/change_return')}}', //请求的url地址
+                        dataType: "json", //返回格式为json
+                        async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                        data: {id:id} , //参数值
+                        method: "POST", //请求方式
+                        success: function(res) {
+                            if(res.code == 200){
+                                layer.msg(res.msg, {
+                                    icon: 1,
+                                    time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                                },function () {
+                                    $('#refresh').click();
+                                });
+                            }else{
+                                layer.msg(res.msg);
+                            }
 
-            var index = layer.open({
-                title: '添加用户',
-                type: 1,
-                shade: 0.2,
-                maxmin:true,
-                shadeClose: true,
-                area: [openWH[0] + 'px', openWH[1] + 'px'],
-                offset: [openWH[2] + 'px', openWH[3] + 'px'],
-                content: content,
-            });
-            $(window).on("resize", function () {
-                layer.full(index);
-            });
+                        },
+                    });
+
+            })
         });
 
-        $(document).on('click','#check',function(){
-            layer.confirm('真的删除行么', function (index) {
-                obj.del();
-                layer.close(index);
-            });
-            var checkStatus = table.checkStatus('currentTableId')
-                , data = checkStatus.data;
-            layer.alert(JSON.stringify(data));
+        $('.intention').each(function(){
+
+            $(this).on('click',function(){
+                var id = this.parentNode.getAttribute('data-id');
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{csrf_token()}}"
+                    },
+                    url: '{{url('message/change_interest')}}', //请求的url地址
+                    dataType: "json", //返回格式为json
+                    async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                    data: {id:id,status:1} , //参数值
+                    method: "POST", //请求方式
+                    success: function(res) {
+                        if(res.code == 200){
+                            layer.msg(res.msg, {
+                                icon: 1,
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            },function () {
+                                $('#refresh').click();
+                            });
+                        }else{
+                            layer.msg(res.msg);
+                        }
+
+                    },
+                });
+
+            })
         });
 
-        $(document).on('click','#delete_art',function(){
-            layer.confirm('真的删除行么', function (index) {
-                obj.del();
-                layer.close(index);
-            });
-            var checkStatus = table.checkStatus('currentTableId')
-                , data = checkStatus.data;
-            layer.alert(JSON.stringify(data));
+        $('.no-intention').each(function(){
+
+            $(this).on('click',function(){
+                var id = this.parentNode.getAttribute('data-id');
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{csrf_token()}}"
+                    },
+                    url: '{{url('message/change_interest')}}', //请求的url地址
+                    dataType: "json", //返回格式为json
+                    async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                    data: {id:id,status:2} , //参数值
+                    method: "POST", //请求方式
+                    success: function(res) {
+                        if(res.code == 200){
+                            layer.msg(res.msg, {
+                                icon: 1,
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            },function () {
+                                $('#refresh').click();
+                            });
+                        }else{
+                            layer.msg(res.msg);
+                        }
+
+                    },
+                });
+
+            })
         });
+
+
+        $('.del').each(function(){
+
+            $(this).on('click',function(){
+                var id = this.parentNode.getAttribute('data-id');
+                layer.confirm('真的删除行么', function (index) {
+
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': "{{csrf_token()}}"
+                        },
+                        url: '{{url('message/del_msg')}}', //请求的url地址
+                        dataType: "json", //返回格式为json
+                        async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                        data: {id:id} , //参数值
+                        method: "POST", //请求方式
+                        success: function(res) {
+                            if(res.code == 200){
+                                layer.msg(res.msg, {
+                                    icon: 1,
+                                    time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                                },function () {
+                                    $('#refresh').click();
+                                });
+                            }else{
+                                layer.msg(res.msg);
+                            }
+
+                        },
+                    });
+
+                });
+            })
+        });
+
 
 
     });
