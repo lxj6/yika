@@ -1,5 +1,5 @@
 * text=auto
-*.js linguist-language=JavaScript
-*.css linguist-language=JavaScript
-*.html linguist-language=JavaScript
+*.js linguist-language=php
+*.css linguist-language=php
+*.html linguist-language=php
 CHANGELOG.md export-ignore
